@@ -1,0 +1,19 @@
+{
+  "name": "lab-02",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "build":"echo 'Running Build script'"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "mocha": "^11.7.1"
+  }
+}
+ 
