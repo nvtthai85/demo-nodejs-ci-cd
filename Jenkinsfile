@@ -6,8 +6,7 @@ pipeline {
     }
 
     environment {
-        DOCKER_HUB_CREDENTIALS = credentials('thainvt_push') // Tạo credential trong Jenkins
-        DOCKER_HUB_REPO = "nguyenthai26/my-node-app" // Thay bằng thông tin của bạn
+        DOCKER_HUB_REPO = "nvtthai85/my-node-app" // Thay bằng repo của bạn
     }
 
     stages {
@@ -37,17 +36,20 @@ pipeline {
             }
         }
 
-         stage('Push to Docker Hub') {
+        stage('Push to Docker Hub') {
             steps {
                 script {
-                    // Login vào Docker Hub
-                    sh "echo ${DOCKER_HUB_CREDENTIALS_PSW} | docker login -u ${DOCKER_HUB_CREDENTIALS_USR} --password-stdin"
-                    
-                    // Push image
-                    sh 'docker push ${DOCKER_HUB_REPO}:1.0'
-                    
-                    // Logout (optional)
-                    sh 'docker logout'
+                    withCredentials([usernamePassword(
+                        credentialsId: 'test-push',
+                        passwordVariable: 'DOCKER_PASSWORD',
+                        usernameVariable: 'DOCKER_USERNAME'
+                    )]) {
+                        sh '''
+                            echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+                            docker push ${DOCKER_HUB_REPO}:1.0
+                            docker logout
+                        '''
+                    }
                 }
             }
         }
