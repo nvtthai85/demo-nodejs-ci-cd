@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'docker:24-dind'   // Image có sẵn docker CLI
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
+    agent any
      
     tools {
         nodejs "Nodejs"
