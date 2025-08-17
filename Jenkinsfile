@@ -6,7 +6,7 @@ pipeline {
     }
 
     environment {
-        DOCKER_HUB_CREDENTIALS = credentials('testdev') // Tạo credential trong Jenkins
+        DOCKER_HUB_CREDENTIALS = credentials('thainvt_push') // Tạo credential trong Jenkins
         DOCKER_HUB_REPO = "nguyenthai26/my-node-app" // Thay bằng thông tin của bạn
     }
 
