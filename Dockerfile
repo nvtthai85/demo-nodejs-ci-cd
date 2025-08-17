@@ -1,5 +1,6 @@
 FROM node:latest
 WORKDIR /apps
-ADD . .
+COPY . /apps
 RUN npm install
+EXPOSE 3000
 CMD ["node", "app.js"]
