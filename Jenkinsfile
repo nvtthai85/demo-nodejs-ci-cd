@@ -40,7 +40,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(
-                        credentialsId: 'test_push',
+                        credentialsId: 'test',
                         passwordVariable: 'DOCKER_PASSWORD',
                         usernameVariable: 'DOCKER_USERNAME'
                     )]) {
