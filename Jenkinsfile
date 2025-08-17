@@ -6,7 +6,7 @@ pipeline {
     }
 
     environment {
-        DOCKER_HUB_REPO = "nvtthai85/my-node-app" // Thay bằng repo của bạn
+        DOCKER_HUB_REPO = "nguyenthai26/node-app" // Thay bằng repo của bạn
     }
 
     stages {
