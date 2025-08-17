@@ -5,6 +5,11 @@ pipeline {
         nodejs "Nodejs"
     }
 
+    environment {
+        DOCKER_HUB_CREDENTIALS = credentials('testdev') // Tạo credential trong Jenkins
+        DOCKER_HUB_REPO = "nguyenthai26/my-node-app" // Thay bằng thông tin của bạn
+    }
+
     stages {
 
         stage ('checkout') {
@@ -28,8 +33,23 @@ pipeline {
 
         stage ('Build Image'){
             steps {
-               sh 'docker build -t todoimg .'
+               sh 'docker build -t ${DOCKER_HUB_REPO}:1.0 .'
             }
-        }        
+        }
+
+         stage('Push to Docker Hub') {
+            steps {
+                script {
+                    // Login vào Docker Hub
+                    sh "echo ${DOCKER_HUB_CREDENTIALS_PSW} | docker login -u ${DOCKER_HUB_CREDENTIALS_USR} --password-stdin"
+                    
+                    // Push image
+                    sh 'docker push ${DOCKER_HUB_REPO}:1.0'
+                    
+                    // Logout (optional)
+                    sh 'docker logout'
+                }
+            }
+        }
     }
 }
